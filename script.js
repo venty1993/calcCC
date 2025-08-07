@@ -7,28 +7,28 @@ const ccSize = {
 
 const ccType = {
     hala : {
-        크림치즈 : 560/655,
-        베이컨 : 43/655,
-        할라피뇨 : 52/655
+        크림치즈 : 560,
+        베이컨 : 43,
+        할라피뇨 : 52
     },
     truffle : {
-        크림치즈 : 700/715,
-        후추 : 1/715,
-        오일 : 14/715
+        크림치즈 : 700,
+        후추 : 1,
+        오일 : 14
     },
     salmon : {
-        연어CC : 493/721.9,
-        소금 :1.4/721.9,
-        후추 :2.5/721.9,
-        연어 :100/721.9,
-        양파 :100/721.9,
-        케이퍼 :25/721.9
+        연어CC : 493,
+        소금 :1.4,
+        후추 :2.5,
+        연어 :100,
+        양파 :100,
+        케이퍼 :25
     },
     fig : {
-        연어CC : 2040/2423,
-        무화과 :204 / 2423,
-        호두 : 128 /2423,
-        설탕 : 51 / 2423
+        연어CC : 2040,
+        무화과 :204,
+        호두 : 128,
+        설탕 : 51
     }
 }
 
@@ -49,15 +49,15 @@ for (const element of allInputs) {
 function calcCC(type) {
     const inputs = document.getElementsByClassName(type)
     const targetConatiner = document.querySelector(`.cc-calculate-result.${type}`)
-    console.log(targetConatiner)
-    
-    let total = 0;
+    const raw =ccType[type]
+    const total = Object.values(raw).reduce((sum,val) => sum +val, 0)
 
-    total += parseInt(inputs.item(0).value)*150
-    total += parseInt(inputs.item(1).value)*70
+    let inputTotal = 0;
 
-    if(isNaN(total)){
-        console.log('test?')
+    inputTotal += parseInt(inputs.item(0).value)*150
+    inputTotal += parseInt(inputs.item(1).value)*70
+
+    if(isNaN(inputTotal)){
         targetConatiner.innerHTML='숫자를 입력하쇼'
         return;
     }
@@ -65,7 +65,7 @@ function calcCC(type) {
     makeRow();
 
     function makeRow(){
-        targetConatiner.innerHTML =`total : ${total}`
+        targetConatiner.innerHTML =`total : ${inputTotal}`
 
         const select = ccType[type];
         
@@ -81,7 +81,7 @@ function calcCC(type) {
 
 
                 const weightElement = document.createElement('p') 
-                const weight = total * element
+                const weight = (inputTotal * element)/total
                 weightElement.innerText = weight.toFixed(2) + 'g';
                 if(type === 'hala'){
                     weightElement.innerText += ` (${(weight*(70/68)).toFixed(2)}g)`
