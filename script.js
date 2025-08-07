@@ -83,7 +83,7 @@ function calcCC(type) {
                 const weightElement = document.createElement('p') 
                 const weight = total * element
                 weightElement.innerText = weight.toFixed(2) + 'g';
-                if(type='hala'){
+                if(type === 'hala'){
                     weightElement.innerText += ` (${(weight*(70/68)).toFixed(2)}g)`
                 }
 
