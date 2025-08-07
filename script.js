@@ -80,8 +80,12 @@ function calcCC(type) {
                 nameElement.innerText = `${key} : `;
 
 
-                const weightElement = document.createElement('p')
-                weightElement.innerText = (total * element).toFixed(2);
+                const weightElement = document.createElement('p') 
+                const weight = total * element
+                weightElement.innerText = weight.toFixed(2) + 'g';
+                if(type='hala'){
+                    weightElement.innerText += ` (${(weight*(70/68)).toFixed(2)}g)`
+                }
 
                 rowElement.appendChild(nameElement)
                 rowElement.appendChild(weightElement)
