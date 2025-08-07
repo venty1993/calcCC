@@ -36,6 +36,10 @@ const allInputs = document.getElementsByTagName('input')
 
 console.log(allInputs)
 for (const element of allInputs) {
+    element.addEventListener('focus', ()=>{
+        element.value=''
+    })
+
     element.addEventListener('change', ()=>{
         calcCC(element.classList[1])
     })
